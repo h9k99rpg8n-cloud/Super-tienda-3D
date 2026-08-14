@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
   <meta name="theme-color" content="#0f172a" />
-  <meta name="description" content="Súper Tienda 3D — prototipo web móvil con movimiento y joystick táctil." />
-  <title>Súper Tienda 3D</title>
+  <meta name="description" content="Súper Tienda 3D — simulador web de una tienda mexicana." />
+  <title>Súper Tienda 3D — Alpha 1.1</title>
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" href="./icon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="./styles.css" />
@@ -13,35 +13,54 @@
 <body>
   <div id="game" aria-label="Súper Tienda 3D"></div>
 
-  <div id="hud">
-    <div class="brand">
-      <strong>SÚPER TIENDA 3D</strong>
-      <span>Alpha 0.0.1</span>
+  <section id="main-menu" class="menu-layer">
+    <div class="logo-wrap">
+      <div class="logo-mark">🛒</div>
+      <h1>SÚPER<br><span>TIENDA 3D</span></h1>
+      <p>ALPHA 1.1 · MÉXICO</p>
     </div>
+    <div class="menu-buttons">
+      <button id="play-btn" class="primary">▶ JUGAR</button>
+      <button id="settings-btn">⚙ AJUSTES</button>
+      <button id="customize-btn">👤 PERSONALIZAR</button>
+    </div>
+  </section>
+
+  <section id="settings-panel" class="modal hidden" aria-label="Ajustes">
+    <div class="panel">
+      <h2>⚙ Ajustes</h2>
+      <label>Sensibilidad <input id="sensitivity" type="range" min="50" max="180" value="100"></label>
+      <label>Calidad
+        <select id="quality"><option value="1">Rendimiento</option><option value="1.5" selected>Equilibrado</option><option value="2">Alta</option></select>
+      </label>
+      <button class="close-panel">VOLVER</button>
+    </div>
+  </section>
+
+  <section id="customize-panel" class="modal hidden" aria-label="Personalizar">
+    <div class="panel">
+      <h2>👤 Personalizar</h2>
+      <p>Color de interfaz</p>
+      <div class="swatches">
+        <button data-accent="#16a34a" style="--sw:#16a34a"></button>
+        <button data-accent="#dc2626" style="--sw:#dc2626"></button>
+        <button data-accent="#2563eb" style="--sw:#2563eb"></button>
+        <button data-accent="#eab308" style="--sw:#eab308"></button>
+      </div>
+      <button class="close-panel">VOLVER</button>
+    </div>
+  </section>
+
+  <div id="hud" class="game-ui hidden">
+    <div class="brand"><strong>SÚPER TIENDA 3D</strong><span>Alpha 1.1</span></div>
     <div id="fps" aria-live="polite">-- FPS</div>
   </div>
+  <div id="crosshair" class="game-ui hidden" aria-hidden="true"></div>
+  <div id="joystick" class="touch-control game-ui hidden" aria-label="Joystick de movimiento"><div class="joystick-ring"></div><div id="joystick-knob"></div></div>
+  <button id="interact" class="touch-control game-ui hidden" type="button" aria-label="Interactuar">USAR</button>
+  <div id="hint" class="game-ui hidden"><span class="desktop-hint">WASD para caminar · clic para capturar el ratón</span><span class="mobile-hint">🕹️ Joystick para caminar · arrastra para mirar</span></div>
 
-  <div id="crosshair" aria-hidden="true"></div>
-
-  <div id="joystick" class="touch-control" aria-label="Joystick de movimiento">
-    <div class="joystick-ring"></div>
-    <div id="joystick-knob"></div>
-  </div>
-
-  <button id="interact" class="touch-control" type="button" aria-label="Interactuar">USAR</button>
-
-  <div id="hint">
-    <span class="desktop-hint">WASD para caminar · clic y mueve el ratón para mirar</span>
-    <span class="mobile-hint">🕹️ Mueve el joystick · arrastra la pantalla para mirar</span>
-  </div>
-
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
-    }
-  }
-  </script>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
   <script type="module" src="./src/main.js"></script>
 </body>
 </html>
